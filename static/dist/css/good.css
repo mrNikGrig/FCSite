@@ -223,3 +223,43 @@ label, a{
 .bd-mode-toggle {
     z-index: 1500;
 }
+
+
+.counter {
+	display: inline-flex;
+	column-gap: 7px;
+	align-items: center;
+	user-select: none;
+	// .counter__button
+	&__button {
+		flex: 0 0 30px;
+		height: 30px;
+		border: 1px solid #000;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		// .counter__button_minus
+		&_minus {
+			&.disabled {
+				border: 1px solid #c4c4c4;
+				color: #c4c4c4;
+				cursor: default;
+			}
+		}
+		// .counter__button_plus
+		&_plus {
+		}
+	}
+	// .counter__input
+	&__input {
+		flex: 0 0 30px;
+		input {
+			width: 100%;
+			background-color: #ffc700;
+			border: none;
+			text-align: center;
+		}
+	}
+}

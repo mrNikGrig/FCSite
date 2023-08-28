@@ -14,10 +14,12 @@
         <meta name="description" content="">
         <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-      <link href="../static/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../static/dist/css/bootstrap.min.css" rel="stylesheet">
+
     </head>
 
     <body>
+        <script src="../static/js/request_bask.js"></script>
         <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -116,9 +118,23 @@
                 </div>
                 <div class="col-md-6">
                     {% block description %} {% endblock %}
+                    <h3>Количество</h3>
+                    <div class="counter" data-counter="">
+                        <div class="counter__button counter__button_minus">-</div>
+                        <div class="counter__input"><input type="text" disabled="" placeholder="1" style="text-align: center;"></div>
+                        <div class="counter__button counter__button_plus">+</div>
+                        <button class = "getValue()" style=" width: 25%; height: 15%; align-items: center; background-color: gray; border: none; text-align: center;">добавить в корзину</button>
+
+                    </div>
                 </div>
+
+
+
             </div>
         </div>
+        <input type="hidden" id="myInput" value= {% block name_2 %} {% endblock %}>
     </main>
+        <script src="../static/js/script.js"></script>
+
     </body>
 </html>
