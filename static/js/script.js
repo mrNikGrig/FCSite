@@ -1,5 +1,4 @@
 const counters = document.querySelectorAll('[data-counter]');
-var variableValue = document.getElementById("myInput").value;
 
 
 
@@ -36,5 +35,6 @@ if (counters) {
 	})
 }
 
-
-
+function button_click() {
+                alert("sending...");
+        }
