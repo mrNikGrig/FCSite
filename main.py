@@ -3,17 +3,33 @@ import io
 
 app = Flask(__name__)
 
-names = {'applebox_seat': 'Эплбокс',
-         'cameraID': 'Камера ID',
-         'cinaesaddleCordura': 'Сисендл',
-         'cinemark': 'Кинометка',
-         'cinesaddle': 'Сисендл',
-         'eyeBolt': 'Рым болт',
-         'filters': 'Маркертабс',
-         'monitorBox': 'Монитор бокс',
-         'pipes': 'Чехлы для труб',
-         'star': 'Сименс стар',
-         'teipholder': 'Тейпхолдер'}
+names = {
+    'applebox_seat': 'Эплбокс',
+     'cameraID': 'Камера ID',
+     'cinaesaddleCordura': 'Сисендл',
+     'cinemark': 'Кинометка',
+     'cinesaddle': 'Сисендл',
+     'eyeBolt': 'Рым болт',
+     'filters': 'Маркертабс',
+     'monitorBox': 'Монитор бокс',
+     'pipes': 'Чехлы для труб',
+     'star': 'Сименс стар',
+     'teipholder': 'Тейпхолдер'}
+
+
+price = {
+    'applebox_seat': 6500,
+     'cameraID': 200,
+     'cinaesaddleCordura': 15500,
+     'cinemark': 800,
+     'cinesaddle': 15000,
+     'eyeBolt': 1500,
+     'filters': 200,
+     'monitorBox': 10000,
+     'pipes': 12000,
+     'star': 2100,
+     'teipholder': 1500}
+
 
 def basket_add(name, quantity):
     f = open('static/dist/basket.txt', 'r')
@@ -37,6 +53,7 @@ def basket_add(name, quantity):
     f.close()
     bask = ''
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -57,12 +74,9 @@ def template_debug():
     return render_template('good_template.html')
 
 
-@app.route('/quantity')
-def add_good():
-    name = request.form['name']
-    quantity = request.form['quantityVar']
-    basket_add(str(name), str(quantity))
-    return 'success'
+def getcookie():
+   name = request.cookies.get('name')
+   print(name)
 
 
 if __name__ == "__main__":

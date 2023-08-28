@@ -1,5 +1,5 @@
 const counters = document.querySelectorAll('[data-counter]');
-
+let counterGlobal = 1;
 
 
 if (counters) {
@@ -12,29 +12,35 @@ if (counters) {
 					target.closest('.counter').querySelector('input').value = 1;
 				}
 
-				let value = parseInt(target.closest('.counter').querySelector('input').value);
+				let counter = parseInt(target.closest('.counter').querySelector('input').value);
 
 				if (target.classList.contains('counter__button_plus')) {
-					value++;
+					counter++;
 				} else {
-					--value;
+					--counter;
 				}
 
-				if (value <= 0) {
-					value = 0;
+				if (counter <= 0) {
+					counter = 0;
 					target.closest('.counter').querySelector('.counter__button_minus').classList.add('disabled')
 				} else {
 					target.closest('.counter').querySelector('.counter__button_minus').classList.remove('disabled')
 				}
-				target.closest('.counter').querySelector('input').value = value;
+				target.closest('.counter').querySelector('input').value = counter;
 				window.quantity = {
-                  quantityVar: value
+                  quantityVar: counter
+
                 };
+                counterGlobal = counter;
 			}
 		})
 	})
 }
 
-function button_click() {
-                alert("sending...");
-        }
+function button_click(button) {
+// button.name counterGlobal
+        document.cookie = "name=" + encodeURIComponent(button.name) + '; path=/getCookie;';
+        document.cookie = "quality=" + encodeURIComponent(counterGlobal);
+        alert(document.cookie)
+    }
+
