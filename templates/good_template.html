@@ -112,13 +112,25 @@
                 <div class="col-md-6" style="padding-top: 5%; width:30%">
                     {% block description %} {% endblock %}
                     <h3>Количество</h3>
-                    <div class="counter" data-counter="">
-                        <div class="counter__button counter__button_minus">-</div>
-                        <div class="counter__input"><input type="text" disabled="" placeholder="1" style="text-align: center;"></div>
-                        <div class="counter__button counter__button_plus">+</div>
-                        <button type="button" name = {% block name_2 %} {% endblock %} onclick="button_click(this)" style=" width: 25%; height: 15%; align-items: center; background-color: gray; border: none; text-align: center;">добавить в корзину</button>
+                    <form method="post">
+                        <div class="counter" data-counter="">
+                            <form action="/increment_good" method="POST"></form>
+<!--                            я не знаю зачем нужна эта строка..... но без неё ничего не работает...-->
+                            <form action="/reduce_good" method="POST">
+                                <input type="submit" value="-" >
+                            </form>
 
-                    </div>
+                            <div class="counter__input"><input type="text" disabled="" placeholder={% block counter %} {% endblock %} style="text-align: center;"></div>
+
+                            <form action="/increment_good" method="POST">
+                                <input type="submit" value="+" >
+                            </form>
+                            
+                            <form action="/add_good" method="POST">
+                                <button type="submit" style=" width: 65%; height: 15%; align-items: center; background-color: gray; border: none; text-align: center;">добавить в корзину</button>
+                            </form>
+                        </div>
+                    </form>
                 </div>
 
 
@@ -130,7 +142,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
         <script src="../static/js/color-modes.js"></script>
         <script src="../static/js/color-modes.js"></script>
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script src="https://unpkg.com/cookielib/src/cookie.min.js"></script>
         <script src="https://unpkg.com/cookielib/src/cookie.js"></script>
