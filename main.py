@@ -74,6 +74,7 @@ def template_debug():
     return render_template('good_template.html')
 
 
+@app.route('/')
 def getcookie():
    name = request.cookies.get('name')
    print(name)

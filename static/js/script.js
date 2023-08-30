@@ -39,8 +39,7 @@ if (counters) {
 
 function button_click(button) {
 // button.name counterGlobal
-        document.cookie = "name=" + encodeURIComponent(button.name) + '; path=/getCookie;';
+        document.cookie = "name=" + encodeURIComponent(button.name);
         document.cookie = "quality=" + encodeURIComponent(counterGlobal);
         alert(document.cookie)
     }
-
