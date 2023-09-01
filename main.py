@@ -1,6 +1,11 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, make_response
 import io
+import json
+import telebot
+import threading
 
+
+bot = telebot.TeleBot(open('api_for_telebot.txt', 'r').readline())
 app = Flask(__name__)
 
 names = {
@@ -30,7 +35,8 @@ price = {
      'star': 2100,
      'teipholder': 1500}
 counter = 1
-back_url =  ''
+back_url = ''
+message = ''
 
 
 def basket_add(name, quantity):
@@ -56,6 +62,10 @@ def basket_add(name, quantity):
     bask = ''
 
 
+def message_send(message):
+    bot.send_message(705989551,  message)
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -65,6 +75,11 @@ def index():
 def good(name_good):
     global back_url
     global counter
+    try:
+        if name_good != back_url[back_url.rfind('/')+1:]:
+            counter = 1
+    except:
+        pass
     back_url = '/good/' + name_good
     path = '../static/goods/' + name_good + '/'
     f = io.open('static/goods/' + name_good + '/description.txt', encoding='utf-8')
@@ -93,14 +108,21 @@ def increment_good():
 
 @app.route('/add_good', methods=['post', 'get'])
 def add_good():
-    global back_url
-    global counter
+    global back_url, message, counter
     name = back_url[back_url.rfind('/')+1:] #получаю имя товара из URL
-    basket_add(name, str(counter))
+    message += name + ' ' + str(counter)
     counter = 1
-    return redirect(back_url)
+    return redirect('/add_good/getnsend_data')
+
+
+@app.route('/add_good/getnsend_data')
+def getnsend_data():
+    return render_template('getnsend_data.html')
 
 
 if __name__ == "__main__":
+    # bot.polling()
+    bot_treahed = threading.Thread(target=bot.polling)
     app.run(debug=True)
-    # good('cinesaddle')
+    # site_treahed = threading.Thread(target=app.run)
+
