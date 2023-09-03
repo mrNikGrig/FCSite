@@ -109,25 +109,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6" style="padding-top: 5%; width:30%">
+                <div class="col-md-6" style="padding-top: 5%; width:50%">
                     {% block description %} {% endblock %}
                     <h3>Количество</h3>
                     <form method="post">
                         <div class="counter" data-counter="">
-                            <form action="/increment_good" method="POST"></form>
-<!--                            я не знаю зачем нужна эта строка..... но без неё ничего не работает...-->
-                            <form action="/reduce_good" method="POST">
-                                <input type="submit" value="-" >
-                            </form>
+                                <form action="/increment_good" method="POST"></form>
+    <!--                            я не знаю зачем нужна эта строка..... но без неё ничего не работает...-->
+                                <form action="/reduce_good" method="POST">
+                                    <input type="submit" value="-" >
+                                </form>
 
-                            <div class="counter__input"><input type="text" disabled="" placeholder={% block counter %} {% endblock %} style="text-align: center;"></div>
+                                <div class="counter__input"><input type="text" disabled="" placeholder={% block counter %} {% endblock %} style="text-align: center;"></div>
 
-                            <form action="/increment_good" method="POST">
-                                <input type="submit" value="+" >
-                            </form>
-
+                                <form action="/increment_good" method="POST">
+                                    <input type="submit" value="+" >
+                                </form>
                             <form action="/add_good" method="POST">
-                                <button type="submit" style=" width: 65%; height: 15%; align-items: center; background-color: gray; border: none; text-align: center;">заказать товар</button>
+                                <button type="submit" class="btn btn-success" style=" width: 65%; height: 15%;">заказать товар</button>
                             </form>
                         </div>
                     </form>

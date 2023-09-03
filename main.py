@@ -37,6 +37,7 @@ price = {
 counter = 1
 back_url = ''
 message = ''
+name_good = ''
 
 
 def basket_add(name, quantity):
@@ -71,22 +72,22 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/good/<string:name_good>', methods=['post', 'get'])
-def good(name_good):
-    global back_url
-    global counter
+@app.route('/good/<string:_name_good>', methods=['post', 'get'])
+def good(_name_good):
+    global back_url, counter, name_good
+    name_good = names[_name_good]
     try:
-        if name_good != back_url[back_url.rfind('/')+1:]:
+        if _name_good != back_url[back_url.rfind('/')+1:]:
             counter = 1
     except:
         pass
-    back_url = '/good/' + name_good
-    path = '../static/goods/' + name_good + '/'
-    f = io.open('static/goods/' + name_good + '/description.txt', encoding='utf-8')
+    back_url = '/good/' + _name_good
+    path = '../static/goods/' + _name_good + '/'
+    f = io.open('static/goods/' + _name_good + '/description.txt', encoding='utf-8')
     description = ''
     description += f.read()
     f.close()
-    return render_template('good.html', name_en=name_good, name_rus=names[name_good], path=path, description=description, counter = counter)
+    return render_template('good.html', name_en=_name_good, name_rus=names[_name_good], path=path, description=description, counter = counter)
 
 
 @app.route('/reduce_good', methods=['post', 'get'])
@@ -108,16 +109,26 @@ def increment_good():
 
 @app.route('/add_good', methods=['post', 'get'])
 def add_good():
-    global back_url, message, counter
+    global back_url, message, counter, name_good
     name = back_url[back_url.rfind('/')+1:] #получаю имя товара из URL
     message += name + ' ' + str(counter)
-    counter = 1
     return redirect('/add_good/getnsend_data')
 
 
 @app.route('/add_good/getnsend_data')
 def getnsend_data():
+    global counter, message, name_good
+    message = 'Поступил новый заказ\nЭто:' + name_good + 'в количестве: ' + str(counter) + " шт"+ '\n\n'
+    counter = 1
     return render_template('getnsend_data.html')
+
+
+@app.route('/add_good/getnsend_data/thanks', methods=['POST', 'GET'])
+def thanks():
+    global message
+    message += 'Заказчик: ' + str(request.form['name']) + ' ' + str(request.form['phone']) + ' ' + str(request.form['address'])
+    message_send(message)
+    return redirect('/')
 
 
 if __name__ == "__main__":
