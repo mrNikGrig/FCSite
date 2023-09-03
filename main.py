@@ -118,7 +118,7 @@ def add_good():
 @app.route('/add_good/getnsend_data')
 def getnsend_data():
     global counter, message, name_good
-    message = 'Поступил новый заказ\nЭто:' + name_good + 'в количестве: ' + str(counter) + " шт"+ '\n\n'
+    message = 'Поступил новый заказ\nЭто:' + name_good + ' в количестве: ' + str(counter) + " шт"+ '\n\n'
     counter = 1
     return render_template('getnsend_data.html')
 

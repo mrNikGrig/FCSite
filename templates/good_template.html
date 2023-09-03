@@ -109,6 +109,7 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="col-md-6" style="padding-top: 5%; width:50%">
                     {% block description %} {% endblock %}
                     <h3>Количество</h3>
@@ -125,10 +126,12 @@
                                 <form action="/increment_good" method="POST">
                                     <input type="submit" value="+" >
                                 </form>
-                            <form action="/add_good" method="POST">
-                                <button type="submit" class="btn btn-success" style=" width: 65%; height: 15%;">заказать товар</button>
-                            </form>
+
+
                         </div>
+                        <form action="/add_good" method="POST">
+                            <button type="submit" class="btn btn-success" style=" width: 30%; height: 15%; margin:10px;">заказать товар</button>
+                        </form>
                     </form>
                 </div>
 
